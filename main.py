@@ -18,7 +18,7 @@ def main():
     dplt.calculate_and_display_average_price(stock_data)
     # Plot the data
     dplt.create_and_save_plot(stock_data, ticker, period)
-
+    dplt.notify_if_strong_fluctuations(stock_data, 10)  # Проверяет колебания свыше 10%
 
 if __name__ == "__main__":
     main()

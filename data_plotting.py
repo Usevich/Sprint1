@@ -45,3 +45,29 @@ def calculate_and_display_average_price(data):
 
     # Вывод результата в консоль
     print(f"Средняя цена закрытия акций за указанный период: {average_price:.2f}")
+
+def notify_if_strong_fluctuations(data, threshold):
+    """
+    Уведомляет пользователя, если колебания цен превышают заданный процент.
+
+    :param data: DataFrame, содержащий данные о цене акций.
+    :param threshold: Порог в процентах, который необходимо превысить для уведомления.
+    """
+    if 'Close' not in data:
+        print("Колонка 'Close' отсутствует в предоставленном датафрейме.")
+        return
+
+    # Находим минимальные и максимальные цены закрытия
+    min_price = data['Close'].min()
+    max_price = data['Close'].max()
+
+    # Вычисляем процентовое изменение
+    percentage_change = ((max_price - min_price) / min_price) * 100
+
+    # Проверяем, превышает ли изменение порог и уведомляем пользователя
+    if percentage_change > threshold:
+        print(f"Внимание: Цена акций колебалась более чем на {threshold}% (фактически {percentage_change:.2f}%)!")
+    else:
+        print(f"Изменения в пределах допустимого порога. Фактическое изменение: {percentage_change:.2f}%.")
+
+
