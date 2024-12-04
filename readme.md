@@ -47,6 +47,16 @@
 - data: DataFrame — данные о ценах акций.
 - threshold: float — порог изменения в процентах для уведомления.
 
+### 4. export_data_to_csv(data, filename)
+
+Экспортирует данные акций в CSV файл.
+
+- data: DataFrame, содержащий данные о цене акций.
+- filename: Имя файла для сохранения.
+
+
+
+
 Пример использования: 
 ``` 
 import yfinance as yf

@@ -46,6 +46,7 @@ def calculate_and_display_average_price(data):
     # Вывод результата в консоль
     print(f"Средняя цена закрытия акций за указанный период: {average_price:.2f}")
 
+
 def notify_if_strong_fluctuations(data, threshold):
     """
     Уведомляет пользователя, если колебания цен превышают заданный процент.
@@ -71,3 +72,19 @@ def notify_if_strong_fluctuations(data, threshold):
         print(f"Изменения в пределах допустимого порога. Фактическое изменение: {percentage_change:.2f}%.")
 
 
+def export_data_to_csv(data, filename):
+    """
+    Экспортирует данные акций в CSV файл.
+
+    :param data: DataFrame, содержащий данные о цене акций.
+    :param filename: Имя файла для сохранения.
+    """
+    if not isinstance(data, pd.DataFrame):
+        print("Предосталенная информация не является DataFrame.")
+        return
+
+    try:
+        data.to_csv(filename, index=False)
+        print(f"Данные успешно экспортированы в файл: {filename}")
+    except Exception as e:
+        print(f"Ошибка при сохранении файла: {e}")
