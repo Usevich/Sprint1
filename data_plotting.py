@@ -3,32 +3,43 @@ import pandas as pd
 
 
 def create_and_save_plot(data, ticker, period, filename=None):
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(14, 10))
 
-    if 'Date' not in data:
-        if pd.api.types.is_datetime64_any_dtype(data.index):
-            dates = data.index.to_numpy()
-            plt.plot(dates, data['Close'].values, label='Close Price')
-            plt.plot(dates, data['Moving_Average'].values, label='Moving Average')
-        else:
-            print("Информация о дате отсутствует или не имеет распознаваемого формата.")
-            return
-    else:
-        if not pd.api.types.is_datetime64_any_dtype(data['Date']):
-            data['Date'] = pd.to_datetime(data['Date'])
-        plt.plot(data['Date'], data['Close'], label='Close Price')
-        plt.plot(data['Date'], data['Moving_Average'], label='Moving Average')
+    # Подграфик для цены и скользящей средней
+    ax1 = plt.subplot(3, 1, 1)
+    ax1.plot(data.index, data['Close'], label='Close Price')
+    ax1.plot(data.index, data['Moving_Average'], label='Moving Average')
+    ax1.set_title(f"{ticker} Цена акций и средние")
+    ax1.set_xlabel("Дата")
+    ax1.set_ylabel("Цена")
+    ax1.legend()
 
-    plt.title(f"{ticker} Цена акций с течением времени")
-    plt.xlabel("Дата")
-    plt.ylabel("Цена")
-    plt.legend()
+    # Подграфик для RSI
+    ax2 = plt.subplot(3, 1, 2)
+    ax2.plot(data.index, data['RSI'], label='RSI')
+    ax2.set_title("Индекс относительной силы (RSI)")
+    ax2.set_xlabel("Дата")
+    ax2.set_ylabel("RSI")
+    ax2.axhline(70, color='red', linestyle='--', alpha=0.5, label="Overbought")
+    ax2.axhline(30, color='green', linestyle='--', alpha=0.5, label="Oversold")
+    ax2.legend()
+
+    # Подграфик для MACD
+    ax3 = plt.subplot(3, 1, 3)
+    ax3.plot(data.index, data['MACD'], label='MACD')
+    ax3.plot(data.index, data['MACD_Signal'], label='Signal Line')
+    ax3.bar(data.index, data['MACD_Hist'], label='MACD Histogram', color='gray')
+    ax3.set_title("MACD")
+    ax3.set_xlabel("Дата")
+    ax3.set_ylabel("MACD")
+    ax3.legend()
 
     if filename is None:
-        filename = f"{ticker}_{period}_stock_price_chart.png"
+        filename = f"{ticker}_{period}_stock_price_chart_with_indicators.png"
 
+    plt.tight_layout()
     plt.savefig(filename)
-    print(f"График сохранен как {filename}")
+    print(f"График с индикаторами сохранен как {filename}")
 
 
 def calculate_and_display_average_price(data):

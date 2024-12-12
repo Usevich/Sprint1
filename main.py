@@ -19,6 +19,8 @@ def main():
     stock_data = dd.add_moving_average(stock_data)
     dplt.calculate_and_display_average_price(stock_data)
     # Plot the data
+    stock_data = dd.add_rsi(stock_data)
+    stock_data = dd.add_macd(stock_data)
     dplt.create_and_save_plot(stock_data, ticker, period)
     dplt.notify_if_strong_fluctuations(stock_data, 10)  # Проверяет колебания свыше 10%
     dplt.export_data_to_csv(stock_data, f'{ticker}.csv')  # Экспортирует данные в формат CSV
