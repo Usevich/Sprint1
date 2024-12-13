@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def create_and_save_plot(data, ticker, period, filename=None):
+def create_and_save_plot(data, ticker, filename=None):
     plt.figure(figsize=(14, 10))
 
     # Подграфик для цены и скользящей средней
@@ -35,7 +35,7 @@ def create_and_save_plot(data, ticker, period, filename=None):
     ax3.legend()
 
     if filename is None:
-        filename = f"{ticker}_{period}_stock_price_chart_with_indicators.png"
+        filename = f"{ticker}_stock_price_chart_with_indicators.png"
 
     plt.tight_layout()
     plt.savefig(filename)

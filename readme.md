@@ -5,7 +5,10 @@
 библиотеки `yfinance`. 
 Он включает в себя функции для
 создания графиков, вычисления средней цены
-и уведомления о сильных колебаниях цен.
+и уведомления о сильных колебаниях цен, а также данные
+технического анализа MACD b RSI.
+Кроме стандарнтных периодов можно задать точные 
+даты начала и окончания анализа.
 
 ## Установка
 
@@ -15,6 +18,7 @@
 - matplotlib
 - pandas
 - yfinance
+- ta
 
 Установите зависимости с помощью pip:
 
@@ -75,7 +79,9 @@ ticker = "AAPL"
 data = yf.download(ticker, period="1mo")
 
 # Примеры вызова функций
-create_and_save_plot(data, ticker, "1mo")
+create_and_save_plot(data, ticker)
 calculate_and_display_average_price(data)
 notify_if_strong_fluctuations(data, 10)
+export_data_to_csv(data, f'{ticker}.csv')
+
 ``` 
