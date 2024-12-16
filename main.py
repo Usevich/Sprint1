@@ -1,7 +1,7 @@
 import data_download as dd
 import data_plotting as dplt
 from datetime import datetime
-
+import matplotlib.pyplot as plt
 def main():
     print("Добро пожаловать в инструмент получения и построения графиков биржевых данных.")
     print("Вот несколько примеров биржевых тикеров, которые вы можете рассмотреть: AAPL (Apple Inc), GOOGL "
@@ -37,13 +37,16 @@ def main():
         # Fetch stock data with given period
         stock_data = dd.fetch_stock_data(ticker, period=period)
 
+    print("Доступные стили графиков:")
+    print(plt.style.available)
+    style_choice = input("Выберите стиль графика из списка выше: ")
     # Add moving average to the data
     stock_data = dd.add_moving_average(stock_data)
     dplt.calculate_and_display_average_price(stock_data)
     # Plot the data
     stock_data = dd.add_rsi(stock_data)
     stock_data = dd.add_macd(stock_data)
-    dplt.create_and_save_plot(stock_data, ticker)
+    dplt.create_and_save_plot(stock_data, ticker, style_choice)
     dplt.notify_if_strong_fluctuations(stock_data, 10)  # Проверяет колебания свыше 10%
     dplt.export_data_to_csv(stock_data, f'{ticker}.csv')  # Экспортирует данные в формат CSV
 

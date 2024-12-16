@@ -2,7 +2,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-def create_and_save_plot(data, ticker, filename=None):
+def create_and_save_plot(data, ticker, style='', filename=None ):
+    if style == '':
+        style = 'classic'
+
+    plt.style.use(style)  # Применяем выбранный стиль
     plt.figure(figsize=(14, 10))
 
     # Подграфик для цены и скользящей средней

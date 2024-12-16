@@ -35,7 +35,7 @@
 
 - data: DataFrame — данные о ценах акций.
 - ticker: str — тикер акций (например, "AAPL").
-- period: str — период данных (например, "1mo", "1y").
+- style: str - стиль графика по умолчанию classic
 - filename: str, optional — имя файла для сохранения графика.
 
 Визуализация
@@ -79,7 +79,7 @@ ticker = "AAPL"
 data = yf.download(ticker, period="1mo")
 
 # Примеры вызова функций
-create_and_save_plot(data, ticker)
+create_and_save_plot(data, style, ticker)
 calculate_and_display_average_price(data)
 notify_if_strong_fluctuations(data, 10)
 export_data_to_csv(data, f'{ticker}.csv')
