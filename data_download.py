@@ -25,3 +25,8 @@ def add_macd(data):
     data['MACD_Signal'] = macd.macd_signal()
     data['MACD_Hist'] = macd.macd_diff()
     return data
+
+def add_standard_deviation(data, window_size=20):
+    data['Standard_Deviation'] = data['Close'].rolling(window=window_size).std()
+    return data
+

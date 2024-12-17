@@ -42,6 +42,7 @@ def main():
     style_choice = input("Выберите стиль графика из списка выше: ")
     # Add moving average to the data
     stock_data = dd.add_moving_average(stock_data)
+    stock_data = dd.add_standard_deviation(stock_data)
     dplt.calculate_and_display_average_price(stock_data)
     # Plot the data
     stock_data = dd.add_rsi(stock_data)

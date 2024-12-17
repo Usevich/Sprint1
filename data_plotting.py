@@ -8,15 +8,15 @@ def create_and_save_plot(data, ticker, style='', filename=None ):
 
     plt.style.use(style)  # Применяем выбранный стиль
     plt.figure(figsize=(14, 10))
-
     # Подграфик для цены и скользящей средней
     ax1 = plt.subplot(3, 1, 1)
     ax1.plot(data.index, data['Close'], label='Close Price')
     ax1.plot(data.index, data['Moving_Average'], label='Moving Average')
+    ax1.plot(data.index, data['Standard_Deviation'], label='Стандартное отклонение', color='green', linestyle='--')
     ax1.set_title(f"{ticker} Цена акций и средние")
     ax1.set_xlabel("Дата")
     ax1.set_ylabel("Цена")
-    ax1.legend()
+    ax1.legend(framealpha=0.5, loc='best')
 
     # Подграфик для RSI
     ax2 = plt.subplot(3, 1, 2)
@@ -26,7 +26,7 @@ def create_and_save_plot(data, ticker, style='', filename=None ):
     ax2.set_ylabel("RSI")
     ax2.axhline(70, color='red', linestyle='--', alpha=0.5, label="Overbought")
     ax2.axhline(30, color='green', linestyle='--', alpha=0.5, label="Oversold")
-    ax2.legend()
+    ax2.legend(framealpha=0.5, loc='best')
 
     # Подграфик для MACD
     ax3 = plt.subplot(3, 1, 3)
@@ -36,7 +36,7 @@ def create_and_save_plot(data, ticker, style='', filename=None ):
     ax3.set_title("MACD")
     ax3.set_xlabel("Дата")
     ax3.set_ylabel("MACD")
-    ax3.legend()
+    ax3.legend(framealpha=0.5, loc='best')
 
     if filename is None:
         filename = f"{ticker}_stock_price_chart_with_indicators.png"
@@ -44,6 +44,8 @@ def create_and_save_plot(data, ticker, style='', filename=None ):
     plt.tight_layout()
     plt.savefig(filename)
     print(f"График с индикаторами сохранен как {filename}")
+    # plt.show()
+
 
 
 def calculate_and_display_average_price(data):
