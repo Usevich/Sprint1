@@ -50,7 +50,7 @@ def main():
     dplt.create_and_save_plot(stock_data, ticker, style_choice)
     dplt.notify_if_strong_fluctuations(stock_data, 10)  # Проверяет колебания свыше 10%
     dplt.export_data_to_csv(stock_data, f'{ticker}.csv')  # Экспортирует данные в формат CSV
-
+    dplt.create_interactive_plot(stock_data, ticker) # Рисуем интерактивный график
 
 if __name__ == "__main__":
     main()

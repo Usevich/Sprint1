@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import plotly.graph_objs as go
 
 def create_and_save_plot(data, ticker, style='', filename=None ):
     if style == '':
@@ -105,3 +105,21 @@ def export_data_to_csv(data, filename):
         print(f"Данные успешно экспортированы в файл: {filename}")
     except Exception as e:
         print(f"Ошибка при сохранении файла: {e}")
+
+
+def create_interactive_plot(data, ticker):
+    # Добавляем трассировку данных 'Close'
+    trace = go.Scatter(x=data.index, y=data['Close'], mode='lines', name='Цена закрытия')
+
+    # Создаем макет графика
+    layout = go.Layout(
+        title=f'Интерактивный график для {ticker}',
+        xaxis=dict(title='Дата'),
+        yaxis=dict(title='Цена закрытия'),
+        hovermode='x'
+    )
+
+    # Строим и выводим график
+    fig = go.Figure(data=[trace], layout=layout)
+    fig.show()
+
