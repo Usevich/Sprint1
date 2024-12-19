@@ -2,7 +2,24 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.graph_objs as go
 
-def create_and_save_plot(data, ticker, style='', filename=None ):
+
+def create_and_save_plot(data, ticker, style='', filename=None):
+    """
+    Создает график с тремя подграфиками (цена акций со скользящей средней, RSI, MACD)
+    и сохраняет его в файл.
+
+    :param data: DataFrame. Таблица с данными акций. Ожидаются следующие столбцы:
+                 - 'Close': цены закрытия,
+                 - 'Moving_Average': скользящая средняя,
+                 - 'Standard_Deviation': стандартное отклонение,
+                 - 'RSI': индекс относительной силы,
+                 - 'MACD', 'MACD_Signal', 'MACD_Hist': метрики для MACD.
+    :param ticker: str. Символ акции (например, 'AAPL').
+    :param style: str. Название стиля графика matplotlib (по умолчанию 'classic').
+    :param filename: str. Имя файла, в который будет сохранен график
+     (по умолчанию используется '{ticker}_stock_price_chart_with_indicators.png').
+
+    """
     if style == '':
         style = 'classic'
 
@@ -47,12 +64,13 @@ def create_and_save_plot(data, ticker, style='', filename=None ):
     # plt.show()
 
 
-
 def calculate_and_display_average_price(data):
+    """
+    Вычисляет и выводит среднюю цену закрытия акций за указанный период.
 
-    # Вычисляет и отображает среднюю цену закрытия акций за заданный период.
+    :param data: DataFrame. Таблица с данными акций. Ожидается столбец 'Close' с ценами закрытия.
 
-    # data: DataFrame, содержащий данные о цене акций.
+    """
     if 'Close' not in data:
         print("Колонка 'Close' отсутствует в предоставленном датафрейме.")
         return
@@ -108,6 +126,13 @@ def export_data_to_csv(data, filename):
 
 
 def create_interactive_plot(data, ticker):
+    """
+    Создает и отображает интерактивный график цен закрытия с использованием библиотеки plotly.
+
+    :param data: DataFrame. Таблица с данными акций. Ожидается столбец 'Close' с ценами закрытия.
+    :param ticker: str. Символ акции (например, 'AAPL').
+
+    """
     # Добавляем трассировку данных 'Close'
     trace = go.Scatter(x=data.index, y=data['Close'], mode='lines', name='Цена закрытия')
 
@@ -122,4 +147,3 @@ def create_interactive_plot(data, ticker):
     # Строим и выводим график
     fig = go.Figure(data=[trace], layout=layout)
     fig.show()
-

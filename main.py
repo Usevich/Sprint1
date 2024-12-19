@@ -2,6 +2,8 @@ import data_download as dd
 import data_plotting as dplt
 from datetime import datetime
 import matplotlib.pyplot as plt
+
+
 def main():
     print("Добро пожаловать в инструмент получения и построения графиков биржевых данных.")
     print("Вот несколько примеров биржевых тикеров, которые вы можете рассмотреть: AAPL (Apple Inc), GOOGL "
@@ -12,7 +14,8 @@ def main():
     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc): ")
 
     # Получите ввод пользователя о том, какой способ времени он предпочитает
-    choice = input("Хотите использовать предустановленный период (Введите 'p') или указать конкретные даты (Введите 'd')? ")
+    choice = input("Хотите использовать предустановленный период (Введите 'p')"
+                   " или указать конкретные даты (Введите 'd')? ")
 
     if choice.lower() == 'd':
         # Получить и проверить даты
@@ -50,7 +53,8 @@ def main():
     dplt.create_and_save_plot(stock_data, ticker, style_choice)
     dplt.notify_if_strong_fluctuations(stock_data, 10)  # Проверяет колебания свыше 10%
     dplt.export_data_to_csv(stock_data, f'{ticker}.csv')  # Экспортирует данные в формат CSV
-    dplt.create_interactive_plot(stock_data, ticker) # Рисуем интерактивный график
+    dplt.create_interactive_plot(stock_data, ticker)  # Рисуем интерактивный график
+
 
 if __name__ == "__main__":
     main()

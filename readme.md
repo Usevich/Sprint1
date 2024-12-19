@@ -45,6 +45,7 @@
 - **Цена закрытия и скользящая средняя**
 - **Индекс относительной силы (RSI)**
 - **MACD и его гистограмма**
+- Пример - ![aapl_stock_price_chart_with_indicators.png](aapl_stock_price_chart_with_indicators.png)
 
 #### 2. calculate_and_display_average_price(data)
 
@@ -66,8 +67,13 @@
 - data: DataFrame, содержащий данные о цене акций.
 - filename: Имя файла для сохранения.
 
+#### 5. create_interactive_plot(data, ticker)
 
+Рисует в браузере интерактивный график
 
+- data: DataFrame, содержащий данные о цене акций.
+- ticker: str — тикер акций (например, "AAPL").
+- Пример - ![Intaractive.png](Intaractive.png)
 
 Пример использования: 
 ``` 
